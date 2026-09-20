@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import { verifyToken } from '@/lib/auth';
+import { getStaticBlogBySlug } from '@/lib/staticBlogs';
 
 interface RouteContext {
   params: Promise<{ slug: string }>;
 }
 
 export async function GET(request: NextRequest, context: RouteContext) {
-  await connectDB();
   const { slug } = await context.params;
 
   const token = request.cookies.get('dev_token')?.value;
@@ -17,12 +17,18 @@ export async function GET(request: NextRequest, context: RouteContext) {
   const filter: Record<string, unknown> = { slug };
   if (!isAuth) filter.published = true;
 
-  const blog = await Blog.findOne(filter).lean();
-  if (!blog) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  try {
+    await connectDB();
+    const blog = await Blog.findOne(filter).lean();
+    if (blog) return NextResponse.json(blog);
+  } catch (error) {
+    console.error('Failed to fetch database blog:', error);
   }
 
-  return NextResponse.json(blog);
+  const staticBlog = getStaticBlogBySlug(slug);
+  return staticBlog
+    ? NextResponse.json(staticBlog)
+    : NextResponse.json({ error: 'Not found' }, { status: 404 });
 }
 
 export async function PUT(request: NextRequest, context: RouteContext) {

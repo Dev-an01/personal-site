@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { MOVIE_ENQUIRER, PROJECT_CASE_STUDIES } from './projectCaseStudies';
 
 export interface Project {
   slug: string;
@@ -18,7 +19,22 @@ const PROJECTS_FILE = path.join(process.cwd(), 'content/projects.json');
 
 export function getAllProjects(): Project[] {
   const data = fs.readFileSync(PROJECTS_FILE, 'utf-8');
-  return JSON.parse(data);
+  const projects: Project[] = JSON.parse(data);
+  const enriched = projects.map(project => {
+    const caseStudy = PROJECT_CASE_STUDIES[project.slug];
+    if (!caseStudy) return project;
+
+    const { appendix, body, ...overrides } = caseStudy;
+    return {
+      ...project,
+      ...overrides,
+      longDescription: `${(body || project.longDescription).trim()}\n\n${appendix.trim()}`,
+    };
+  });
+
+  return enriched.some(project => project.slug === MOVIE_ENQUIRER.slug)
+    ? enriched
+    : [...enriched, MOVIE_ENQUIRER];
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {

@@ -46,6 +46,10 @@ yarn-error.log*
 /.impeccable/
 /.gstack/
 
+# local project research/source notes
+/*_a2z.md
+/blog.md
+
 # local editor configuration
 /.idea/
 /.vscode/

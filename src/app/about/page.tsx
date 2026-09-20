@@ -7,19 +7,19 @@ export default function AboutPage() {
   return (
     <article className={`about-page${theme === 'studio' ? ' studio-detail studio-about' : ''}`}>
       <h1>About Anand</h1>
-      <p>I&apos;m a software engineer and computer science graduate from IIIT Jabalpur, working at the point where dependable backend systems, applied AI, and developer tooling meet.</p>
-      <p>I like problems with real constraints: latency budgets, imperfect input, concurrent sessions, difficult failure modes, or algorithms that need to hold up under pressure.</p>
+      <p>I&apos;m an AI engineer, full-stack developer, and computer science graduate from IIIT Jabalpur. I enjoy carrying products from interface and API design through data, model orchestration, testing, and deployment.</p>
+      <p>My recent work spans streaming Next.js clients, stateful conversational agents, hybrid retrieval, realtime WebRTC experiences, and production services where latency, safety, and failure handling matter.</p>
 
       <h2>What I&apos;m working toward</h2>
       <ul>
-        <li>Software engineering for performance-sensitive systems</li>
+        <li>Full-stack product engineering with React, Next.js, and backend APIs</li>
         <li>Competitive programming and algorithmic problem solving</li>
         <li>Applied artificial intelligence and machine learning</li>
-        <li>Firmware, Linux, and lower-level systems work</li>
+        <li>Realtime systems, developer tooling, and reliable deployment</li>
       </ul>
 
       <h2>What I&apos;m building now</h2>
-      <p>AI PR Review Agent coordinates specialist reviewers for security, quality, tests, and documentation, with traceable findings and human approval for uncertain reviews. MoneyPlant is a Telegram-first personal finance and investment tracker with privacy-aware categorization, a correction window, analytics, and portfolio valuation.</p>
+      <p>AI PR Review Agent coordinates grounded specialist reviewers with confidence-based human approval. MoneyPlant combines a Telegram bot, shared financial logic, and a private analytics dashboard. RAG Builder exposes retrieval from first principles, while my AI Avatar work joins a responsive React/WebRTC client to a GPU inference pipeline.</p>
 
       <h2>Why I write</h2>
       <p>Private Learning Logs help me capture ideas while they are fresh. Public posts turn selected notes into clearer explanations that other technical readers can inspect, challenge, and reuse.</p>

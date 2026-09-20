@@ -65,7 +65,7 @@ export default function ProjectListClient() {
       {/* Header */}
       {isStudio ? (
         <header className="studio-index-header">
-          <h1>Selected work, without the sales pitch.</h1>
+          <h1>Projects, without the sales pitch.</h1>
           <p>What I built, which constraints shaped it, and the result you can inspect.</p>
           {isDevMode && <button onClick={() => setShowEditor(true)} className="btn-primary">+ ADD PROJECT</button>}
         </header>
@@ -105,7 +105,7 @@ export default function ProjectListClient() {
       )}
 
       {loading ? (
-        <p>{isStudio ? 'Loading selected work…' : isSystem ? 'LOADING_MODULES...' : 'Loading projects...'}</p>
+        <p>{isStudio ? 'Loading projects…' : isSystem ? 'LOADING_MODULES...' : 'Loading projects...'}</p>
       ) : projects.length === 0 ? (
         <p>{isStudio ? 'No published projects yet.' : isSystem ? 'NO_MODULES_FOUND.' : 'No projects yet.'}</p>
       ) : (

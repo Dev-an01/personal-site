@@ -62,7 +62,9 @@ export default function BlogPostClient({ slug }: { slug: string }) {
   if (loading) return <p>Loading...</p>;
   if (notFound || !blog) return <p>Blog post not found.</p>;
 
-  if (editing && isDevMode) {
+  const isStaticPost = blog._id.startsWith('static:');
+
+  if (editing && isDevMode && !isStaticPost) {
     return (
       <div>
         <h1 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Edit Post</h1>
@@ -84,7 +86,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
 
   return (
     <div className={theme === 'studio' ? 'studio-detail studio-article' : undefined}>
-      {isDevMode && (
+      {isDevMode && !isStaticPost && (
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
           <button onClick={() => setEditing(true)} className="btn-primary" style={{ fontSize: '0.75rem' }}>
             Edit
