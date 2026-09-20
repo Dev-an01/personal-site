@@ -52,6 +52,14 @@ export default function Topbar() {
       </nav>
 
       <div className="topbar-actions">
+        <a
+          href="https://drive.google.com/file/d/1rHSomTGfAJZCfzHzJQ_QNxoQ51iWh1ye/view?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+          className="topbar-link"
+        >
+          Résumé
+        </a>
         <a href="https://github.com/Dev-an01" target="_blank" rel="noreferrer" className="sys-social-link">
           <GithubIcon />
         </a>

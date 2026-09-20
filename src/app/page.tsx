@@ -134,7 +134,6 @@ export default function Home() {
           <nav className="home-links" aria-label="Professional links">
             <a href="https://github.com/Dev-an01" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
             <a href="https://www.linkedin.com/in/abstractanand/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-            <a href="https://drive.google.com/file/d/1rHSomTGfAJZCfzHzJQ_QNxoQ51iWh1ye/view?usp=sharing" target="_blank" rel="noreferrer">Résumé <span aria-hidden="true">↗</span></a>
             <a href="https://leetcode.com/u/_Sterben/" target="_blank" rel="noreferrer">LeetCode <span aria-hidden="true">↗</span></a>
             <a href="https://codeforces.com/profile/-Sterben-" target="_blank" rel="noreferrer">Codeforces <span aria-hidden="true">↗</span></a>
             <a href="mailto:j.anand.dev@gmail.com">j.anand.dev@gmail.com</a>
