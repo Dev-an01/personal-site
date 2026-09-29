@@ -6,7 +6,7 @@ export interface StaticBlog {
   title: string;
   slug: string;
   date: string;
-  category: 'AI';
+  category: 'AI' | 'System-Design';
   tags: string[];
   summary: string;
   content: string;
@@ -18,8 +18,24 @@ const MOVIE_RAG_PATH = path.join(
   'content/blogs/building-a-movie-rag-search-engine.md',
 );
 
+const MINI_REDIS_PATH = path.join(
+  process.cwd(),
+  'content/blogs/building-a-redis-like-server.md',
+);
+
 export function getStaticBlogs(): StaticBlog[] {
   return [
+    {
+      _id: 'static:building-a-redis-like-server',
+      title: 'Building a Redis-like Server from First Principles',
+      slug: 'building-a-redis-like-server-from-first-principles',
+      date: '2026-09-29T00:00:00.000Z',
+      category: 'System-Design',
+      tags: ['C++', 'event loop', 'data structures', 'Redis'],
+      summary: 'How I built a Redis-like C++ server layer by layer: framed protocol, poll() event loop, incremental rehashing, AVL-backed sorted sets, heap-driven TTLs, and a thread pool.',
+      content: fs.readFileSync(MINI_REDIS_PATH, 'utf-8'),
+      published: true,
+    },
     {
       _id: 'static:building-a-movie-rag-search-engine',
       title: 'Building a Movie RAG Search Engine from First Principles',

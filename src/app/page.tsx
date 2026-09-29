@@ -5,6 +5,13 @@ import Link from 'next/link';
 
 const projects = [
   {
+    name: 'MiniRedis',
+    href: '/projects/mini-redis',
+    outcome: 'A Redis-like C++ server with a poll() event loop, sorted sets on an order-statistic AVL tree, and heap-driven key TTLs.',
+    stack: ['C++', 'poll()', 'AVL tree', 'pthreads'],
+    live: '',
+  },
+  {
     name: 'RAG Builder',
     href: '/projects/rag-builder',
     outcome: 'Indexed 1,174 PDF chunks into an inspectable 15.99 MB dataset for local retrieval and grounded generation.',
@@ -37,13 +44,6 @@ const projects = [
     href: '/projects/moneyplant',
     outcome: 'Turns Telegram messages into reversible transactions through a five-minute correction window.',
     stack: ['TypeScript', 'Next.js', 'PostgreSQL', 'grammY'],
-    live: '',
-  },
-  {
-    name: 'Personal Site',
-    href: '/projects/personal-site',
-    outcome: 'Improved measured request throughput by 16.2% while reducing post-load memory by 11%.',
-    stack: ['Next.js', 'TypeScript', 'MongoDB', 'Vercel'],
     live: '',
   },
 ];
@@ -88,8 +88,9 @@ const experience = [
 ];
 
 const skills: Array<[string, string[]]> = [
-  ['Languages', ['Python', 'TypeScript', 'JavaScript', 'SQL']],
-  ['ML & AI', ['RAG', 'LangGraph', 'Embeddings', 'Hybrid retrieval']],
+  ['Languages', ['C++', 'Python', 'TypeScript', 'JavaScript', 'SQL']],
+  ['ML & AI', ['RAG', 'LangGraph', 'Embeddings', 'Hybrid retrieval', 'OpenCV']],
+  ['Systems & Networking', ['TCP/IP sockets', 'Event loops (poll)', 'Multithreading (pthreads)', 'Binary protocols', 'Data structures']],
   ['Backend & Infra', ['FastAPI', 'Node.js', 'PostgreSQL', 'Redis', 'Docker', 'GCP']],
   ['Tools', ['Git', 'Linux', 'CI/CD', 'WebRTC']],
 ];

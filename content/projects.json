@@ -1,5 +1,17 @@
 [
   {
+    "slug": "mini-redis",
+    "name": "MiniRedis",
+    "category": "Systems",
+    "description": "A Redis-like in-memory server in C++ with a poll() event loop, sorted sets on an order-statistic AVL tree, heap-driven TTLs, and idle-connection timeouts.",
+    "longDescription": "> Read the full build write-up: [Building a Redis-like Server from First Principles](/blog/building-a-redis-like-server-from-first-principles)\n\n## Overview\n\nMiniRedis is a small Redis-like server written in C++ to learn how an in-memory database works underneath: a single-threaded event loop over `poll()`, a length-prefixed binary protocol, string keys, sorted sets, key TTLs, and idle-connection timeouts.\n\n## System architecture\n\n```text\n./client  ── length-prefixed request (nstr, len, str…)\n    │\n    ▼\npoll() event loop (single thread, pipelined requests)\n    ├── connection buffers + idle-connection LRU list\n    ├── command dispatch\n    │     ├── get / set / del / keys ──► hashtable (progressive rehashing)\n    │     ├── zadd / zrem / zscore / zquery ──► zset\n    │     │        ├── AVL tree keyed by (score, name) + subtree counts\n    │     │        └── hashtable keyed by name\n    │     └── pexpire / pttl ──► min-heap of expiry timestamps\n    ├── timers: next idle close + next TTL feed the poll() timeout\n    └── thread pool ──► frees large sorted sets off the event loop\n    │\n    ▼\ntagged reply: nil | err | str | int | dbl | arr (nested)\n```\n\n## Tech stack and why\n\n- **C++17 (GNU extensions):** manual memory layout and `container_of()` for intrusive data structures.\n- **`poll()` event loop:** one thread handles many non-blocking connections without locks around the keyspace.\n- **Chained hashtable with progressive rehashing:** migrates 128 keys per operation so resizing never stalls the loop.\n- **Order-statistic AVL tree:** subtree counts make rank offsets in `zquery` O(log n).\n- **Binary min-heap + intrusive linked list:** O(log n) TTL updates and O(1) next-idle-connection lookup.\n- **pthreads pool:** deletes large sorted sets in the background.\n\n## Hard decisions and trade-offs\n\n- **Intrusive nodes over STL containers:** one entry can sit in the keyspace, the TTL heap, and a sorted set without extra allocation, at the cost of pointer arithmetic that the compiler cannot check.\n- **Single-threaded command execution:** no locking and predictable ordering, but one CPU core serves every command.\n- **Bounded expiry work:** at most 2,000 keys are reaped per loop pass so a mass expiry cannot stall other clients.\n\n## Testing\n\n`make test` runs AVL insert/delete checks against `std::multiset`, rank-offset checks for every node in trees of size 1–200, heap checks against `std::multimap`, and end-to-end command transcripts against a live server.\n\n## Limitations\n\nData lives in memory only, the port is fixed at 1234, and only strings and sorted sets are supported. Persistence (snapshots or an append-only log) and the RESP protocol would be the next steps toward real Redis compatibility.",
+    "techStack": ["C++", "poll()", "AVL tree", "Hashtable", "Min-heap", "pthreads"],
+    "image": "",
+    "github": "https://github.com/Dev-an01/MiniRedis",
+    "live": "",
+    "featured": true
+  },
+  {
     "slug": "firstweek",
     "name": "FirstWeek",
     "category": "AI",
